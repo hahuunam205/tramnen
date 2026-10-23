@@ -1,0 +1,117 @@
+/* TRAM NEN · base.css
+   Reset, design tokens (màu thương hiệu), typography, animation dùng chung */
+
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  /* màu chủ đạo TRAM NEN */
+  --brand:#92523b;
+  --brand-2:#935035;
+  --cream:#ffedcf;
+  --ink:#4b3224;
+
+  --brand-dark:#7a412c;
+  --cream-2:#FFF5E4;
+  --flame:#F0A04A;
+  --text:#5a4032;
+  --sub:#86705f;
+  --page:#FFFAF2;
+  --line:#EEDFC9;
+  --card:#FFFFFF;
+  --danger:#B42318;
+  --ok:#4F7A3A;
+  --warn:#B26A00;
+  --shadow-sm:0 1px 2px rgba(75,50,36,.07),0 1px 1px rgba(75,50,36,.04);
+  --shadow-md:0 8px 24px rgba(75,50,36,.10);
+  --shadow-lg:0 20px 50px rgba(75,50,36,.18);
+  --radius:16px;
+  --header-h:72px;
+  --serif:'Playfair Display',Georgia,'Times New Roman',serif;
+  --sans:'Be Vietnam Pro',system-ui,-apple-system,'Segoe UI',sans-serif;
+  --hand:'Dancing Script',cursive;
+  --ease:cubic-bezier(.2,.75,.3,1);
+}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+html,body{background:var(--page);color:var(--ink);font-family:var(--sans);font-size:16px;
+  -webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+body{min-height:100dvh;overflow-x:hidden}
+body.tn-modal-open{overflow:hidden}
+a{color:inherit;text-decoration:none}
+button{font-family:inherit;cursor:pointer;color:inherit}
+button:disabled{cursor:not-allowed}
+input,select,textarea{font-family:inherit;color:inherit}
+img,video{max-width:100%;display:block}
+code{font-size:.92em;background:var(--cream-2);padding:1px 6px;border-radius:5px}
+:focus-visible{outline:2px solid var(--brand);outline-offset:2px}
+::selection{background:var(--cream);color:var(--brand-dark)}
+.tn-skip{position:absolute;left:-9999px;top:8px;z-index:999;background:var(--ink);color:#fff;padding:8px 14px;border-radius:8px}
+.tn-skip:focus{left:8px}
+main:focus{outline:none}
+[hidden]{display:none!important}
+
+@media (prefers-reduced-motion: reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{animation-duration:.01ms!important;animation-delay:0ms!important;
+    animation-iteration-count:1!important;transition-duration:.01ms!important}
+}
+
+/* ============================================================
+   ANIMATION DÙNG CHUNG
+   ============================================================ */
+@keyframes float{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(7%,-9%) scale(1.08)}}
+@keyframes rise{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
+@keyframes fadeIn{to{opacity:1}}
+@keyframes draw{to{stroke-dashoffset:0}}
+@keyframes flicker{
+  0%,100%{transform:scale(1,1) rotate(0deg)}
+  22%{transform:scale(.93,1.07) rotate(-2.5deg)}
+  48%{transform:scale(1.05,.94) rotate(1.8deg)}
+  74%{transform:scale(.97,1.05) rotate(-1deg)}
+}
+@keyframes glow{0%,100%{opacity:.5;transform:scale(1)}50%{opacity:.95;transform:scale(1.18)}}
+@keyframes mist{0%{opacity:0;transform:translateY(0)}25%{opacity:.85}100%{opacity:0;transform:translateY(-22px)}}
+@keyframes twinkle{0%,100%{opacity:.25;transform:scale(.6)}50%{opacity:1;transform:scale(1.1)}}
+@keyframes marquee{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+@keyframes blink{50%{opacity:0}}
+@keyframes bounceY{0%,100%{transform:translateY(0)}50%{transform:translateY(6px)}}
+
+/* blob nền trôi lơ lửng */
+.blobs{position:absolute;inset:0;pointer-events:none;overflow:hidden}
+.blobs span{position:absolute;border-radius:50%;aspect-ratio:1;
+  animation-name:float;animation-timing-function:ease-in-out;animation-iteration-count:infinite}
+.blobs .b1{background:rgba(255,255,255,.5);filter:blur(2px)}
+.blobs .b2{background:rgba(255,255,255,.25)}
+.blobs .b3{background:rgba(146,82,59,.12)}
+
+/* hình minh họa sản phẩm */
+.tn-art{display:block;width:100%;height:auto;overflow:visible}
+.tn-flicker{transform-box:fill-box;transform-origin:50% 100%;animation:flicker 1.9s ease-in-out infinite}
+.tn-glow{transform-box:fill-box;transform-origin:50% 50%;animation:glow 2.6s ease-in-out infinite}
+.tn-mist{animation:mist 3.6s ease-in infinite;opacity:0}
+.tn-twinkle{transform-box:fill-box;transform-origin:center;animation:twinkle 2.4s ease-in-out infinite}
+.tn-art-wrap{position:absolute;left:20%;right:20%;bottom:6%;z-index:1;
+  filter:drop-shadow(0 6px 10px rgba(75,50,36,.10))}
+.tn-photo{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:2}
+
+/* icon */
+.tn-ic{display:inline-flex;width:1.1em;height:1.1em;flex-shrink:0;vertical-align:-.15em}
+.tn-ic svg{width:100%;height:100%}
+
+/* logo */
+.tn-logo{display:inline-flex;align-items:center;gap:.55em;line-height:0}
+.tn-logo-mark{height:2.1em;width:auto;flex-shrink:0}
+.tn-logo-text{height:.82em;width:auto}
+.tn-logo--dark{color:#68381D}
+.tn-logo--light{color:var(--cream)}
+.tn-logo--img img{height:2.4em;width:auto;object-fit:contain}
+
+/* ============================================================
+   HIỆU ỨNG KHI CUỘN
+   ============================================================ */
+.reveal{opacity:0;transform:translateY(26px);transition:opacity .8s var(--ease),transform .8s var(--ease);transition-delay:var(--rd,0s)}
+.reveal--left{transform:translateX(-30px)}
+.reveal.in{opacity:1;transform:none}
+/* chữ hiện từng ký tự */
+.split .sw{display:inline-block;white-space:nowrap}
+.split .sc{display:inline-block;opacity:0;transform:translateY(.45em) rotate(4deg);
+  transition:opacity .5s var(--ease),transform .6s var(--ease);transition-delay:calc(var(--d) + var(--rd,0s))}
+.split.in .sc,.in .split .sc{opacity:1;transform:none}
